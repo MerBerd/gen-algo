@@ -141,25 +141,44 @@ for i in [5, 2, 3, 4, 1]:
     Seq3.addNode(G.getNode(str(i)))
 
 
-def bestAndWorst(sequences):
+def bestAndWorst(G, sequences):
     sequences = sorted(sequences, key=lambda x: sumOfDistances(G, x))
-
-    return sequences[0], sequences[-1]
+    best = sumOfDistances(G, sequences[0])
+    worst = sumOfDistances(G, sequences[-1])
+    bestSeqs = []
+    worstSeqs = []
+    for seq in sequences:
+        if sumOfDistances(G, seq) == best:
+            bestSeqs.append(seq)
+        elif sumOfDistances(G, seq) == worst:
+            worstSeqs.append(seq)
+    
+    return random.choice(bestSeqs), random.choice(worstSeqs)
 
 
 def genAlgo(graph, sequences):
     for i in range(1, len(graph.edges)-1):
-        best, worst = bestAndWorst(sequences)
+        print(f'Generation {i}:')
+        for seq in sequences:
+            print(seq)
+        best, worst = bestAndWorst(graph, sequences)
+        print(f'the best ch: {best} | the worst ch: {worst}')
         sequences.remove(worst)
         new = best.mutate(i)
+        print(f'mutatet new ch: {new}')
         sequences.append(new)
+        print()
     
-    return sequences
+    # return bestAndWorst(graph, sequences)[0]
+    print(f'final best ch: {bestAndWorst(graph, sequences)[0]} with distance: {sumOfDistances(G, bestAndWorst(graph, sequences)[0])}')
+    
 
-res = genAlgo(G, [Seq1, Seq2, Seq3])
+#res = genAlgo(G, [Seq1, Seq2, Seq3])
+# print(res, sumOfDistances(G, res))
+genAlgo(G, [Seq1, Seq2, Seq3])
 
-for i in res:
-    print(i, sumOfDistances(G, i))
+#for i in res:
+#   print(i, sumOfDistances(G, i))
 
 
 
