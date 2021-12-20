@@ -136,10 +136,10 @@ def bestAndWorst(G, sequences):
 
 
 def genAlgo(graph, sequences):
-    for i in range(1, len(graph.edges)-1):
+    for i in range(1, len(graph.edges)):
         print(f'Generation {i}:')
         for seq in sequences:
-            print(seq)
+            print(seq, sumOfDistances(graph, seq))
         best, worst = bestAndWorst(graph, sequences)
         print(f'the best ch: {best} | the worst ch: {worst}')
         sequences.remove(worst)
@@ -153,7 +153,7 @@ def genAlgo(graph, sequences):
     
 
 ############## First Case ########################
-
+'''
 G = Graph()
 for i in [2, 5, 3, 1, 4]:
     G.addNode(Node(str(i)))
@@ -179,7 +179,7 @@ for i in [5, 2, 3, 4, 1]:
     Seq3.addNode(G.getNode(str(i)))
 
 genAlgo(G, [Seq1, Seq2, Seq3])
-
+'''
 ############## Second Case ########################
 
 G1 = Graph()
@@ -216,7 +216,7 @@ genAlgo(G1, [Seq1, Seq2, Seq3, Seq4])
 
 
 ############## Third Case ########################
-
+'''
 Seq1 = Sequence()
 Seq2 = Sequence()
 Seq3 = Sequence()
@@ -237,7 +237,7 @@ for i in [2, 6, 5, 1, 4, 3]:
 
 genAlgo(G1, [Seq1, Seq2, Seq3, Seq4])
 
-
+'''
 
 
 
